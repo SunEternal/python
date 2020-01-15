@@ -1,0 +1,36 @@
+本题用的是letcode22题括号生成的解题思路：回溯法
+从今以后也要像师兄一样养成写题记letcode的习惯、好记性不如烂笔头
+看到letcode上面别人的解法，明明很简单，但是自己一直无法理解回溯递归这一过程，也许是大学没好好学吧，研究生之后要补回来。
+算法本身并不难，主要是return递归这一过程，最后自己还是通过pycharm一步步断点执行才明白了这是怎么做的。
+之前的想法一直很简单，为什么每次return之后不会陷入原来的状态进而陷入死循环
+但经过我用pycharm断点调试，突然意识到，虽然会return到原来的状态，但是之前已经执行的语句是不会在执行的，也就是说，比如我
+一开始在right>0这一分支，那么我return之后将会直接回到这个最后一句，然后就直接执行完毕了，进入上一个迭代，但是如果我在if left>0这一分支，
+那么我return之后回到这一分支，将会接着执行下面的right>0，这样就可以避免死循环了，算法本身没什么难度，但是递归和回溯他的思想可是困扰了我很多年，
+这次终于把这个大坑填上了，以后在面对这类问题，我对递归和回溯的理解也就能更近一步了！
+
+res = []
+cur_str = ''
+
+def dfs(cur_str, left, right):
+    """
+    :param cur_str: 从根结点到叶子结点的路径字符串
+    :param left: 左括号还可以使用的个数
+    :param right: 右括号还可以使用的个数
+    :return:
+    """
+    if left == 0 and right == 0:
+        res.append(cur_str)
+        print(cur_str)
+        return 10
+        
+    if right < left:
+        print(right)
+        return 10
+    if left > 0:
+        print("left",left)
+        dfs(cur_str + '(', left - 1, right)
+    if right > 0:
+        print("right",right)
+        dfs(cur_str + ')', left, right - 1)
+
+dfs(cur_str, 2, 2)
