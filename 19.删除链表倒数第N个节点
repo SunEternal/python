@@ -1,0 +1,25 @@
+数据结构这个东西是我大学以来一直没有好好学的一门课，以往的学习总是停留在课本表面，没有深入的去编程实践，趁着寒假的机会多刷了一些题目，在这里总结一下。
+19题这道题并不难，只需要同时遍历链表和从第N个节点开始的链表即可，但是这里面有一个坑，就是处理这个链表时不能直接处理，应当先在这个链表前加一个表头，之前对表头这些操作一直很不理解，今天实践之后终于明白了，如果没有这个表头，很容易出现.next溢出的情况，而加上了这个表头，就可以防止只有一个节点的这种特殊情况！
+下面附上源代码
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        p = ListNode(-1)
+        p.next, head = head, p
+        _slow = _fast = head
+        for i in range(n):
+            _fast = _fast.next
+        while _fast and _fast.next:
+            _fast = _fast.next
+            _slow = _slow.next
+#为了防止下面的.next.next出现溢出，所以我们要从表头开始遍历
+        _slow.next = _slow.next.next
+
+#但是返回的时候要把这个表头去掉，从head.next开始遍历
+        return head.next
