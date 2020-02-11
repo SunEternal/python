@@ -1,0 +1,34 @@
+经过半个下午的练习，大概写了2-3道关于链表的题目，终于自己靠着自己的思路，完完整整的写出来了一道链表。
+一会准备再看看各位大佬的代码，这道题我用的是双指针的写法，效率战胜了66%，还是有待提高的
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def rotateRight(self, head: ListNode, k: int) -> ListNode:
+        x=ListNode(-1)
+        x.next=head
+        tmp=x
+        ln=0
+        if not head or not head.next:
+            return head
+        while tmp.next:
+            tmp=tmp.next
+            ln+=1
+        if ln<=k:
+            k=k%ln
+            k=ln-k
+        else:
+            k=ln-k
+        if k==ln:
+            return head
+        tmp2=x
+        for i in range(k):
+            tmp2=tmp2.next
+        y=tmp2.next
+        tmp2.next=None
+        tmp.next=x.next
+        return y
