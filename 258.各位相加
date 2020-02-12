@@ -1,0 +1,31 @@
+直接上代码……
+class Solution:
+    def addDigits(self, num: int) -> int:
+        while num>=10:
+            num=str(num)
+            tmp=0
+            for i in num:
+                tmp+=int(i)
+            num=tmp
+        return num
+然后发现，直接对数字处理，速度居然不如先换成字符再处理，不知道为什么，效率差距巨大
+class Solution:
+    def addDigits(self, num: int) -> int:
+        while num>=10:
+            tmp=0
+            while num:
+                tmp+=(num%10)
+                num=num//10
+            num=tmp
+        return num
+hhh。。。
+递归：原谅我太菜了，目前先到这一步吧，是真的菜……
+class Solution:
+    def addDigits(self, num: int) -> int:
+        if num<10:
+            return num
+        num=str(num)
+        tmp=0
+        for i in num:
+            tmp+=int(i)
+        return self.addDigits(tmp)
