@@ -1,0 +1,35 @@
+写5-6道链表题，发现算法真的不算难，只要掌握了本质思路，剩下的凭借自己也是可以写出来的
+但是这道题因为if和while没有搞清楚，导致我出现了巨大的错误，这种错误很不应该，是一种惯性思维错误
+最终还是依靠双指针写出来了，很nice，加油继续不断提高自己吧，以后的题都要靠自己完全写出来~
+
+执行用时 :87.20%
+
+内存消耗 :50.00%
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        new_node=ListNode(-1)
+        new_node.next=head
+        old_node=new_node
+        fast_node=head
+        n=0
+        while fast_node and fast_node.next:
+            if fast_node.val==fast_node.next.val:
+                new_node.next=fast_node.next.next
+                fast_node=fast_node.next
+                n+=1
+                continue
+            if n!=0:
+                fast_node=fast_node.next
+                n=0
+            else:
+                fast_node=fast_node.next
+                new_node=new_node.next
+        return old_node.next
+ 
