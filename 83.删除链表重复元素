@@ -1,0 +1,22 @@
+没什么说的，一道简单题，挺好想的，易错点就一个if fast_node.val==fast_node.next.val，总是忘记值相等和点相等不是一回事
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        new_node=ListNode(-1)
+        new_node.next=head
+        fast_node=head
+        old_node=new_node
+        while fast_node and fast_node.next:
+            if fast_node.val==fast_node.next.val:
+                fast_node=fast_node.next
+                new_node.next=fast_node
+            else:
+                new_node=new_node.next
+                fast_node=fast_node.next
+        return old_node.next
