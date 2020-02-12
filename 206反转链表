@@ -22,3 +22,15 @@ class Solution:
             pre = cur
             cur = tmp
         return pre
+
+#递归写法，我现在基本思路已经形成了，很舒服，这道题是return pre，原因是，不管到哪一步，最后一定要return这个才行，这样才能连成一整个链，（从开头链）
+然后就是搞懂这个函数每次变换的指针是什么就可以了，从最后一个往回推，找好对应位置即可，并不算难
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return head
+        pre=self.reverseList(head.next)
+        head.next.next=head
+        head.next=None
+        return pre
+
