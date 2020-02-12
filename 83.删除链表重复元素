@@ -20,3 +20,18 @@ class Solution:
                 new_node=new_node.next
                 fast_node=fast_node.next
         return old_node.next
+
+后面又看了一下别人递归的算法，挺猛的，感觉递归这一块，还要慢慢练习才行啊，递归算法，如果你一开始就能反着理解，那还是不难的，问题在于递归的这个意识，我还没有建立起来，未来要专题练一下递归的算法，嘻嘻
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return head
+        
+        child = self.deleteDuplicates(head.next)
+        if child and head.val == child.val:
+            head.next = child.next
+            child.next = None
+            
+        return head
+
+
