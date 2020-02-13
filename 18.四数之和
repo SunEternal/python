@@ -1,0 +1,25 @@
+第一次结果，心态爆炸，2624ms，战胜5%...
+讲道理这种题，第一次写只能头铁三次循环，而且网上大家也都是这种操作，为什么我的就这么慢呢，不太懂……再去研究下
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        ln=len(nums)
+        nums.sort()
+        res=[]
+        for i in range(ln-3):
+            for j in range(ln-1,i+2,-1):
+                left=i+1
+                right=j-1
+                while (right-left)>0:
+                    if (nums[left]+nums[i]+nums[j]+nums[right])==target:
+                        res.append([nums[i],nums[left],nums[right],nums[j]])
+                        right-=1
+                        left+=1
+                    elif (nums[left]+nums[i]+nums[j]+nums[right])>target:
+                        right-=1
+                    else:
+                        left+=1
+        tes=[]
+        for i in res:
+            if i not in tes:
+                tes.append(i)
+        return tes
