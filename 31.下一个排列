@@ -1,0 +1,22 @@
+每一道算法题，只要理解了它的本质，都可以顺着这个思路写出来，我比较纠结的是，这种和写数学题思路一样，每次都要先分析，但是否存在一种思维定式的写法，可以使得每一道题
+的写法成为一种定式，进而增加算题效率。
+本题也是，只要看出来，从后向前遍历，然后交换比前一个数最小的即可，最后对后半部分排序即可。
+其中交换比前一个数最小的这一步是容易出错的，但是这个过程，我一开始就没有想到，还是错误了两边之后才发现，还需要多积累
+时间效率击败了80%
+
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        ln=len(nums)
+        for i in range(ln-1,0,-1):
+            if nums[i]>nums[i-1]:
+                right=ln-1
+                while nums[right]<=nums[i-1]:
+                    right-=1
+                nums[right],nums[i-1]=nums[i-1],nums[right]
+                nums[i:]=sorted(nums[i:])
+                return nums
+        nums.sort()
+        return nums
