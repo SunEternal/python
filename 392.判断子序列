@@ -1,0 +1,16 @@
+一次循环，时间复杂度O（n）
+需要注意空集""
+直接循环遍历t集，对于s集，每发现s集在t集内存在相同值，就向前遍历一次，需要判断j是否超出
+
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        if s=="":
+            return True
+        ls=len(s)
+        j=0
+        for i in t:
+            if j<ls and s[j]==i:
+                j+=1
+            if j==ls:
+                return True
+        return False
