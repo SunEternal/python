@@ -1,0 +1,9 @@
+首先，先对身高排序，按照倒叙方式排序
+然后依次取出新排序方式的人，将它放在people[1]的位置，因为前面的肯定都比他大或相等，所以放的位置也都一定是可靠地
+class Solution:
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+        people.sort(key = lambda x: (-x[0], x[1]))
+        output = []
+        for p in people:
+            output.insert(p[1], p)
+        return output
