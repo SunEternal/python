@@ -1,4 +1,5 @@
-这道题需要一个flag，我是想到了，但是前后一样的情况，没有考虑0，挺奇怪的
+这道题需要一个flag，我是想到了，但用的并不好，按理是一个常规思路
+就是如果前后符号不同，那么乘积<0,另外就是，如果符号不同，可以将标签flag=-flag，这是一个核心用法，可惜当时没想到，
 
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
