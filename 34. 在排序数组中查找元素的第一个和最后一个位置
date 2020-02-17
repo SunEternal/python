@@ -1,0 +1,34 @@
+递归我快吐了，最终还是依靠自己写了出来，中间一度纠结如何处理左半边和右半边，最后想到了既然没办法同时处理两边
+那就先处理左边，再处理右边吧，所以这个递归的时间是比较大的，有2*log(n),主要是水平有限，也写不出来一次性的了
+代码也不够精简，但最终好歹是写出来了
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def panding(left,right,left_right):
+            if left>right:
+                return -1
+            p=(left+right)//2
+            if nums[p] < target:
+                return panding(p+1,right,left_right)
+            elif nums[p]>target:
+                return panding(left,p-1,left_right)
+            else:
+                if left_right:
+                    left_node=panding(left,p-1,left_right)
+                    if left_node ==-1:
+                        return p
+                    else:
+                        return left_node
+                else:
+                    right_node=panding(p+1,right,left_right)
+                    if right_node==-1:
+                        return p
+                    else:
+                        return right_node
+        left_=panding(0,len(nums)-1,True)
+        right_=panding(0,len(nums)-1,False)
+        if left_==-1:
+            return [right_,right_]
+        elif right_==-1:
+            return [left_,left_]
+        else:
+            return [left_,right_]
