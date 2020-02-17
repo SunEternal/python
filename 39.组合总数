@@ -1,0 +1,17 @@
+核心之处在于helper函数的使用，使用回溯法即可解决，但helper(i+1 ,tmp)此处，不要改变tmp只是改变i+1,这样就可以完全遍历而不重复
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        n = len(candidates)
+        res = []
+        def helper(i, tmp):
+            if sum(tmp) > target or i == n:
+                return 
+            if sum(tmp) == target:
+                res.append(tmp)
+                return 
+            helper(i,tmp + [candidates[i]])
+            helper(i+1 ,tmp)
+        helper(0, [])
+        return res
