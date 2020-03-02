@@ -1,0 +1,12 @@
+不知道为什么递归时间超了，人傻了……
+只能用正常的斐波那契数列来写了，不过感觉自己写的问题也是蛮大的
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        res=1
+        a=[1,2]
+        if n==2:
+            return 2
+        for i in range(n-2):
+            res=a[i]+a[i+1] 
+            a.append(res)       
+        return res
